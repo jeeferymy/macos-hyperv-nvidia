@@ -3,7 +3,7 @@
 ## Host and VM
 
 - Host: Windows 11 with Hyper-V, a laptop with an Intel Core Ultra 9 185H (Intel Arc
-  integrated graphics drives the built-in panel) and an RTX 4060 Laptop GPU (`10de:28a0`).
+  integrated graphics drives the built-in panel) and an RTX 3050 Laptop GPU (`10de:25a0`).
   The laptop has no display MUX.
 - VM: Generation 2, Secure Boot off, 8 vCPUs, 6 GiB **static** memory, NAT through the
   "Default Switch" with a static MAC, two SCSI disks (a small FAT32 OpenCore disk and the
@@ -46,13 +46,13 @@ The Windows boot entry needs `hypervisoriommupolicy Enable` (`bcdedit`, done onc
 
 ## Display path
 
-The RTX 4060 renders and composites the desktop, but it has no monitor. The picture reaches
+The RTX 3050 renders and composites the desktop, but it has no monitor. The picture reaches
 Windows through Hyper-V's synthetic video device:
 
 ```
  macOS apps ──Metal──> NVMTLDriver (Metal plugin, NVK/Vulkan)
                               │
- WindowServer composites on the RTX 4060 (Metal compositor, IOPresentment)
+ WindowServer composites on the RTX 3050 (Metal compositor, IOPresentment)
                               │  composed frame in GPU VRAM
                               v
  NVAccel (Hyper-V carry): copy engine VRAM -> 32 MiB system-memory pool
