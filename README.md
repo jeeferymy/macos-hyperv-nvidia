@@ -1,9 +1,9 @@
-# macOS on Hyper-V with an NVIDIA RTX 4060 (Metal)
+# macOS on Hyper-V with an NVIDIA RTX 3050 (Metal)
 
-![macOS Sequoia with an RTX 4060 running in a Hyper-V VM on Windows 11](docs/images/macos-on-windows.png)
+![macOS Sequoia with an RTX 3050 running in a Hyper-V VM on Windows 11](docs/images/macos-on-windows.png)
 
 macOS 15.8.1 (Sequoia) running in a Hyper-V virtual machine on Windows 11, with the laptop's
-RTX 4060 passed through by Discrete Device Assignment (DDA) and accelerated by
+RTX 3050 passed through by Discrete Device Assignment (DDA) and accelerated by
 [nullmoth/nvidia-macos-driver](https://github.com/nullmoth/nvidia-macos-driver) v2.3.1 plus
 the Hyper-V patches in this repository. The GPU is handed back to Windows when macOS shuts
 down, without restarting Windows.
@@ -23,7 +23,7 @@ What works:
 
 - Metal 3 on the RTX 4060 inside the VM: WindowServer and apps render on the GPU (System
   Information reports "Metal Support: Metal 3").
-- GPU handoff: assign the RTX 4060 to the VM, start macOS, shut down, and return the GPU to
+- GPU handoff: assign the RTX 3050 to the VM, start macOS, shut down, and return the GPU to
   the Windows NVIDIA driver, all without a Windows restart.
 - Desktop compositing on the GPU, including blur and vibrancy (Dock, menus, sidebars).
 - The "black box in inactive windows" artifact is fixed
@@ -31,7 +31,7 @@ What works:
 
 Limits:
 
-- **The display path is laggy.** The RTX 4060 has no monitor here, so every frame is copied
+- **The display path is laggy.** The RTX 3050 has no monitor here, so every frame is copied
   out of GPU memory into Hyper-V's synthetic framebuffer and then shown through Hyper-V's
   RDP-based console viewer. Rendering is fast; getting pixels to the screen is not.
 - **No direct monitor** unless one is connected to the port wired to the RTX 4060 (likely HDMI; untested in the
